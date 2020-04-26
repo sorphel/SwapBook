@@ -1,0 +1,2 @@
+rootProject.name='SwapBook'
+include ':app'
