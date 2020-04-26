@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "298976078208",
+    "firebase_url": "https://swapbook-654f4.firebaseio.com",
+    "project_id": "swapbook-654f4",
+    "storage_bucket": "swapbook-654f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298976078208:android:6eea9e498397582cc27965",
+        "android_client_info": {
+          "package_name": "com.smallgroup.swapbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298976078208-btjf3m4gmobnbe1c6mi8muuqs8f3gcat.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.smallgroup.swapbook",
+            "certificate_hash": "1957b82c7b018478a621e583623b08461f93f173"
+          }
+        },
+        {
+          "client_id": "298976078208-6es5fhlu6t248u4as6o3o88iqt2c7pi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMhldAxAEYidXATwmpdu45C9eAfE2Y_3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298976078208-6es5fhlu6t248u4as6o3o88iqt2c7pi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
