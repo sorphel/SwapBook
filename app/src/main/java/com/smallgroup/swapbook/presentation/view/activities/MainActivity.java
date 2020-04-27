@@ -1,8 +1,10 @@
-package com.smallgroup.swapbook;
+package com.smallgroup.swapbook.presentation.view.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.smallgroup.swapbook.R;
 
 public class MainActivity extends AppCompatActivity {
 
