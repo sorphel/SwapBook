@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.smallgroup.swapbook.R;
 
-public class MainActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
