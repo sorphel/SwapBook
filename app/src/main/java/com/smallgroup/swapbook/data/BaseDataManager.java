@@ -2,7 +2,7 @@ package com.smallgroup.swapbook.data;
 
 import java.util.Map;
 
-public interface DataManager {
+public interface BaseDataManager {
 
     Map<String, Object> getData();
 

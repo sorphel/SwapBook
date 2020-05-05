@@ -2,7 +2,7 @@ package com.smallgroup.swapbook.data;
 
 import java.util.Map;
 
-public class StorageManager implements DataManager {
+public class StorageManagerBase implements BaseDataManager {
     @Override
     public Map<String, Object> getData() {
         return null;
