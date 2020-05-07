@@ -4,4 +4,6 @@ import com.smallgroup.swapbook.presentation.contracts.BaseContract;
 
 public interface BaseView extends BaseContract.View {
 
+    void updateView();
+
 }
