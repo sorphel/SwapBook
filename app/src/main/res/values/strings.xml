@@ -4,4 +4,10 @@
     <string name="search_board">Search</string>
     <string name="my_contacts">Contacts</string>
     <string name="my_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="shelve">Shelve</string>
+    <string name="search">Search</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
 </resources>

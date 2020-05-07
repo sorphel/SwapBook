@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/navigation_shelve">
+
+    <fragment
+        android:id="@+id/navigation_shelve"
+        android:name="com.smallgroup.swapbook.presentation.view.fragments.ShelveFragment"
+        android:label="@string/shelve"
+        tools:layout="@layout/fragment_shelve">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.smallgroup.swapbook.presentation.view.fragments.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.smallgroup.swapbook.presentation.view.fragments.NotificationsFragment"
+        android:label="@string/notifications"
+        tools:layout="@layout/fragment_notifications"/>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.smallgroup.swapbook.presentation.view.fragments.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile"/>
+
+
+</navigation>
