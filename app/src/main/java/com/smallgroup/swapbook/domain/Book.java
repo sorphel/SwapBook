@@ -1,48 +1,54 @@
 package com.smallgroup.swapbook.domain;
 
+import java.util.HashMap;
+
 public class Book {
 
-    private String mName;
+    private String mTitle;
     private String mAuthor;
     private String mUrl;
     private String mIdUser;
 
-    public Book(String mName, String mAuthor, String mUrl, String mIdUser) {
-        this.mName = mName;
+    public Book(String mTitle, String mAuthor, String mUrl, String mIdUser) {
+        this.mTitle = mTitle;
         this.mAuthor = mAuthor;
         this.mUrl = mUrl;
         this.mIdUser = mIdUser;
     }
 
-    public String getmName() {
-        return mName;
+    public Book(HashMap<String, Object> bookMap){
+
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public String getTitle() {
+        return mTitle;
     }
 
-    public String getmAuthor() {
+    public void setTitle(String mName) {
+        this.mTitle = mName;
+    }
+
+    public String getAuthor() {
         return mAuthor;
     }
 
-    public void setmAuthor(String mAuthor) {
+    public void setAuthor(String mAuthor) {
         this.mAuthor = mAuthor;
     }
 
-    public String getmUrl() {
+    public String getUrl() {
         return mUrl;
     }
 
-    public void setmUrl(String mUrl) {
+    public void setUrl(String mUrl) {
         this.mUrl = mUrl;
     }
 
-    public String getmIdUser() {
+    public String getIdUser() {
         return mIdUser;
     }
 
-    public void setmIdUser(String mIdUser) {
+    public void setIdUser(String mIdUser) {
         this.mIdUser = mIdUser;
     }
 }

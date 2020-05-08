@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardUseCompatPadding="true"
+    app:cardPreventCornerOverlap="false"
+    app:cardCornerRadius="8dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/card_image_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:id="@+id/card_image_border"
+                android:layout_width="300dp"
+                android:layout_height="400dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/border"/>
+
+            <ImageView
+                android:id="@+id/card_image"
+                android:layout_width="300dp"
+                android:layout_height="400dp"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/card_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/card_image_lay"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:text="Book Title"/>
+
+        <TextView
+            android:id="@+id/card_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/card_book_title"
+            android:gravity="center"
+            android:textSize="40sp"
+            android:text="Book Author"/>
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

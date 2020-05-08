@@ -29,8 +29,4 @@ public class ShelveFragment extends Fragment implements BaseView {
         return inflater.inflate(R.layout.fragment_shelve, container, false);
     }
 
-    @Override
-    public void updateView() {
-
-    }
 }

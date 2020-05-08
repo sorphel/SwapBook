@@ -1,26 +1,24 @@
 package com.smallgroup.swapbook.presentation.contracts;
 
-import com.google.firebase.auth.FirebaseUser;
+import com.smallgroup.swapbook.domain.Book;
 import com.smallgroup.swapbook.presentation.presenters.BasePresenter;
 import com.smallgroup.swapbook.presentation.repositories.BaseRepository;
 import com.smallgroup.swapbook.presentation.view.BaseView;
 
-public interface AuthContract {
+import java.util.List;
+
+public interface SearchContract {
 
     interface View extends BaseView {
-        void updateView(FirebaseUser user);
-        void showError();
+        void loadCard();
     }
 
     interface Presenter extends BasePresenter {
-
-        void onAuth(String token);
-        void onUpdateView(FirebaseUser user);
+        List<Book> onLoadBooks();
     }
 
     interface Repository extends BaseRepository {
-
-        void firebaseAuthWithGoogle(String idToken);
+        List<Book> loadBooks();
     }
 
 }

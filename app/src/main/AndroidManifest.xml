@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".presentation.view.activities.AddBookActivity"></activity>
         <activity android:name=".presentation.view.activities.AppActivity">
+
+        </activity>
+        <activity android:name=".presentation.view.activities.SignInActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".presentation.view.activities.SignInActivity">
-
         </activity>
     </application>
 
