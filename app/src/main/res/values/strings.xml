@@ -10,4 +10,6 @@
     <string name="search">Search</string>
     <string name="notifications">Notifications</string>
     <string name="profile">Profile</string>
+    
+    <string name="web_client_secret">x1gA2LvMCQOUyJQi3Z6ZUUHt</string>
 </resources>

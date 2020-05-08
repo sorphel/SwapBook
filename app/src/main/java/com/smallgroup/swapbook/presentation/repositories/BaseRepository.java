@@ -2,6 +2,6 @@ package com.smallgroup.swapbook.presentation.repositories;
 
 import com.smallgroup.swapbook.presentation.contracts.BaseContract;
 
-public interface BaseRepository extends BaseContract.Repository {
+public interface BaseRepository {
 
 }
