@@ -28,6 +28,6 @@ public class SearchPresenter implements SearchContract.Presenter {
 
     @Override
     public List<Book> onLoadBooks() {
-        return null;
+        return mRepository.loadBooks();
     }
 }
