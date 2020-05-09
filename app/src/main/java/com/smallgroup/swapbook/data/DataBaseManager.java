@@ -14,6 +14,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.smallgroup.swapbook.domain.Book;
+import com.smallgroup.swapbook.presentation.repositories.BaseRepository;
+import com.smallgroup.swapbook.presentation.repositories.SearchRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +38,10 @@ public class DataBaseManager {
     private Map<String, Object> data;
     private List<Book> bookList= new ArrayList();
 
-    public DataBaseManager() {
+    SearchRepository mRepo;
 
+    public DataBaseManager(SearchRepository repo) {
+        mRepo = repo;
     }
 
     public void loadBooks(){
@@ -52,6 +56,7 @@ public class DataBaseManager {
                                 Book book = new Book((HashMap<String, Object>) document.getData());
                                 bookList.add(book);
                             }
+                            mRepo.setBooks(bookList);
                         }
                     }
                 });

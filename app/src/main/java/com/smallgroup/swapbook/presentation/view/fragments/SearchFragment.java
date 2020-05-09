@@ -55,6 +55,8 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
 
         loadCard();
+        cardAdapter = new MyCardBookAdapter(books);
+        cardStackView.setAdapter(cardAdapter);
 
         cardStackView.setLayoutManager(layoutManager);
 
@@ -64,9 +66,9 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
     @Override
     public void loadCard() {
         books = mPresenter.onLoadBooks();
-        cardAdapter = new MyCardBookAdapter(books);
-        cardStackView.setAdapter(cardAdapter);
+
     }
+
 
     @Override
     public void onCardDragging(Direction direction, float ratio) {
