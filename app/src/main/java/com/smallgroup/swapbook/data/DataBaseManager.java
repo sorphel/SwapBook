@@ -4,6 +4,8 @@ package com.smallgroup.swapbook.data;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,26 +40,27 @@ public class DataBaseManager {
     private Map<String, Object> data;
     private List<Book> bookList= new ArrayList();
 
-    SearchRepository mRepo;
 
-    public DataBaseManager(SearchRepository repo) {
-        mRepo = repo;
+    public DataBaseManager() {
     }
 
     public void loadBooks(){
 
         db.collection(BOOKS)
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for (QueryDocumentSnapshot document : task.getResult()){
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            for (QueryDocumentSnapshot document : queryDocumentSnapshots){
                                 Book book = new Book((HashMap<String, Object>) document.getData());
                                 bookList.add(book);
                             }
-                            mRepo.setBooks(bookList);
-                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
                     }
                 });
 

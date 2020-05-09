@@ -12,7 +12,7 @@ public class SearchRepository implements SearchContract.Repository {
     private SearchContract.Presenter mPresenter;
     private List<Book> books = new ArrayList();
 
-    DataBaseManager manager = new DataBaseManager(this);
+    DataBaseManager manager = new DataBaseManager();
 
     public SearchRepository(SearchContract.Presenter mPresenter) {
         this.mPresenter = mPresenter;
@@ -21,10 +21,7 @@ public class SearchRepository implements SearchContract.Repository {
     @Override
     public List<Book> loadBooks() {
         manager.loadBooks();
-        return books;
+        return manager.getAllBooks();
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
 }
