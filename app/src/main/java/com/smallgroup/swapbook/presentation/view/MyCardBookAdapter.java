@@ -1,5 +1,6 @@
 package com.smallgroup.swapbook.presentation.view;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.smallgroup.swapbook.R;
 import com.smallgroup.swapbook.domain.Book;
 
@@ -18,6 +22,7 @@ import java.util.List;
 public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.MyViewHolder> {
 
     private List<Book> books = new ArrayList();
+    private Context context;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -36,8 +41,9 @@ public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.My
         }
     }
 
-    public MyCardBookAdapter(List<Book> books) {
+    public MyCardBookAdapter(Context context, List<Book> books) {
         this.books = books;
+        this.context = context;
     }
 
 
@@ -55,6 +61,14 @@ public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.My
     public void onBindViewHolder( MyViewHolder holder, int position) {
         holder.title.setText(books.get(position).getTitle());
         holder.author.setText(books.get(position).getAuthor());
+        String url = books.get(position).getUrl();
+        if (!url.equals("null")) {
+            StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(url);
+            Glide.with(context)
+                    .load(reference)
+                    .into(holder.image);
+        }
+
     }
 
     @Override

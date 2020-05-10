@@ -27,7 +27,14 @@ public class SearchPresenter implements SearchContract.Presenter {
     }
 
     @Override
-    public List<Book> onLoadBooks() {
-        return mRepository.loadBooks();
+    public void onLoadBooks() {
+        mRepository.loadBooks();
     }
+
+    @Override
+    public void onUpdateView(List<Book> books) {
+        mView.updateView(books);
+    }
+
+
 }

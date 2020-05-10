@@ -11,14 +11,16 @@ public interface SearchContract {
 
     interface View extends BaseView {
         void loadCard();
+        void updateView(List<Book> books);
     }
 
     interface Presenter extends BasePresenter {
-        List<Book> onLoadBooks();
+        void onLoadBooks();
+        void onUpdateView(List<Book> books);
     }
 
     interface Repository extends BaseRepository {
-        List<Book> loadBooks();
+        void loadBooks();
     }
 
 }
