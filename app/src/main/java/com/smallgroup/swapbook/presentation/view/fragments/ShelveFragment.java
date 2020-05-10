@@ -1,20 +1,38 @@
 package com.smallgroup.swapbook.presentation.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.smallgroup.swapbook.R;
+import com.smallgroup.swapbook.domain.Book;
+import com.smallgroup.swapbook.presentation.contracts.ShelveContract;
+import com.smallgroup.swapbook.presentation.presenters.ShelvePresenter;
 import com.smallgroup.swapbook.presentation.view.BaseView;
+import com.smallgroup.swapbook.presentation.view.MyCardBookAdapter;
+import com.smallgroup.swapbook.presentation.view.activities.AddBookActivity;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShelveFragment extends Fragment implements BaseView {
+public class ShelveFragment extends Fragment implements ShelveContract.View {
+
+    ShelveContract.Presenter mPresenter;
+
+    MyCardBookAdapter adapter;
+    RecyclerView recyclerView;
+
+    final int resourceId = R.layout.item_book_shelve;
+
+    private final int ADD_REQUEST = 77;
 
     public ShelveFragment() {
         // Required empty public constructor
@@ -24,9 +42,32 @@ public class ShelveFragment extends Fragment implements BaseView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragmentupdateView();
+        View view = inflater.inflate(R.layout.fragment_shelve, container, false);
 
-        return inflater.inflate(R.layout.fragment_shelve, container, false);
+        mPresenter = new ShelvePresenter(this);
+        recyclerView = view.findViewById(R.id.book_list_view);
+
+        mPresenter.onLoadUsersBook();
+
+        return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mPresenter.onLoadUsersBook();
+    }
+
+    @Override
+    public void updateView(List<Book> books) {
+        if (books != null) {
+            adapter = new MyCardBookAdapter(this.getActivity().getApplicationContext(), books, resourceId);
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    public void onAddBook(){
+        Intent intent = new Intent(this.getActivity(), AddBookActivity.class);
+        this.getActivity().startActivityForResult(intent, ADD_REQUEST);
+    }
 }

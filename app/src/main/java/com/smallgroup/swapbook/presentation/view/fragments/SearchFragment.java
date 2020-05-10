@@ -33,6 +33,8 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
     SearchContract.Presenter mPresenter;
 
+    final int resource = R.layout.item_book_card;
+
     public SearchFragment() {
 
     }
@@ -61,7 +63,7 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
     @Override
     public void updateView(List<Book> books) {
-        cardAdapter = new MyCardBookAdapter(this.getActivity().getApplicationContext(), books);
+        cardAdapter = new MyCardBookAdapter(this.getActivity().getApplicationContext(), books, resource);
         cardStackView.setAdapter(cardAdapter);
     }
 

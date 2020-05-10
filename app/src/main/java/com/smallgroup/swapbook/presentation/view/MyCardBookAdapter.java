@@ -23,6 +23,7 @@ public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.My
 
     private List<Book> books = new ArrayList();
     private Context context;
+    private int itemId;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,9 +42,10 @@ public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.My
         }
     }
 
-    public MyCardBookAdapter(Context context, List<Book> books) {
+    public MyCardBookAdapter(Context context, List<Book> books, int resource) {
         this.books = books;
         this.context = context;
+        this.itemId = resource;
     }
 
 
@@ -51,7 +53,7 @@ public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.My
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView cardView = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_book_card, parent, false);
+                .inflate(itemId, parent, false);
 
         MyViewHolder holder = new MyViewHolder(cardView);
         return holder;
