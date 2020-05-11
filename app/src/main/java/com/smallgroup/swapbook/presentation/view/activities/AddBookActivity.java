@@ -10,26 +10,58 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.smallgroup.swapbook.R;
+import com.smallgroup.swapbook.presentation.contracts.AddContract;
+import com.smallgroup.swapbook.presentation.presenters.AddPresenter;
 
 import java.io.IOException;
 
-public class AddBookActivity extends AppCompatActivity {
+public class AddBookActivity extends AppCompatActivity implements AddContract.View {
 
     private static final int IMAGE_REQUEST = 71;
 
     private Uri filePath;
 
+    private AddContract.Presenter mPresenter;
+
     private ImageButton image;
-    private ProgressDialog progressDialog;
+    private ProgressBar progressBar;
+    private EditText mTitle, mAuthor;
+    private Button mUploadButton, mCloseButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
+
+        mPresenter = new AddPresenter(this);
+
+        progressBar = findViewById(R.id.progress_bar);
+        mTitle = findViewById(R.id.book_title);
+        mAuthor = findViewById(R.id.book_author);
+        mUploadButton = findViewById(R.id.upload);
+        mCloseButton = findViewById(R.id.close);
+
+        mUploadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add();
+            }
+        });
+
+        mCloseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                close();
+            }
+        });
 
         image = findViewById(R.id.add_image);
         image.setOnClickListener(new View.OnClickListener() {
@@ -39,8 +71,7 @@ public class AddBookActivity extends AppCompatActivity {
             }
         });
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Загрузка...");
+
     }
 
     @Override
@@ -58,24 +89,43 @@ public class AddBookActivity extends AppCompatActivity {
         }
     }
 
+    @Override
     public void add(){
         //TODO mPresenter.uploadBook()
-        setResult(RESULT_OK);
-        finish();
+        String title = mTitle.getText().toString();
+        String author = mAuthor.getText().toString();
+        if (!title.equals("") && !author.equals("") && filePath != null){
+            mPresenter.onAdd(title, author, filePath);
+        }
+        else {
+            Toast.makeText(this,"Заполните все поля", Toast.LENGTH_LONG).show();
+        }
     }
 
+    @Override
     public void close(){
         setResult(RESULT_CANCELED);
         finish();
     }
 
-    public void dialogShow(){
-        progressDialog.show();
+    @Override
+    public void progressShow() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
-    public void dialogDismiss(){
-        progressDialog.dismiss();
+    @Override
+    public void progressClose() {
+        progressBar.setVisibility(View.INVISIBLE);
+
+        setResult(RESULT_OK);
+        finish();
     }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this,"Ошибка загрузки", Toast.LENGTH_LONG).show();
+    }
+
 
     public void chooseImage(View view) {
         Intent intent = new Intent();

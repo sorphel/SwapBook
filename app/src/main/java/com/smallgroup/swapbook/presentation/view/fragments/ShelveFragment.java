@@ -5,11 +5,13 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smallgroup.swapbook.R;
@@ -30,8 +32,9 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
     ShelveContract.Presenter mPresenter;
 
     MyCardBookAdapter adapter;
-    RecyclerView recyclerView;
-    FloatingActionButton addButton;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private FloatingActionButton addButton;
 
     final int resourceId = R.layout.item_book_shelve;
 
@@ -49,6 +52,8 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
 
         mPresenter = new ShelvePresenter(this);
         recyclerView = view.findViewById(R.id.book_list_view);
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         addButton = view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,12 +66,7 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
 
         return view;
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mPresenter.onLoadUsersBook();
-    }
+    
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -81,6 +81,7 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
         if (books != null) {
             adapter = new MyCardBookAdapter(this.getActivity().getApplicationContext(), books, resourceId);
             recyclerView.setAdapter(adapter);
+            //Toast.makeText(getContext(), books.get(0).getUrl(), Toast.LENGTH_LONG).show();
         }
     }
 

@@ -24,7 +24,7 @@ public class ShelveRepository implements ShelveContract.Repository {
 
     private ShelveContract.Presenter mPresenter;
     private List<Book> bookList = new ArrayList();
-    private String uid = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+    private String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     public ShelveRepository(ShelveContract.Presenter mPresenter) {
         this.mPresenter = mPresenter;
@@ -32,9 +32,8 @@ public class ShelveRepository implements ShelveContract.Repository {
 
     @Override
     public void loadUsersBooks() {
-        //TODO add user documents
         db.collection(USERS)
-                .document(uid)
+                .document(user)
                 .collection(SHELVE)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {

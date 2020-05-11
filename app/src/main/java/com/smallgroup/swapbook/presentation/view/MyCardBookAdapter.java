@@ -70,7 +70,6 @@ public class MyCardBookAdapter extends RecyclerView.Adapter<MyCardBookAdapter.My
                     .load(reference)
                     .into(holder.image);
         }
-
     }
 
     @Override
