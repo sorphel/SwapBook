@@ -12,4 +12,8 @@
     <string name="profile">Profile</string>
     
     <string name="web_client_secret">x1gA2LvMCQOUyJQi3Z6ZUUHt</string>
+    <string name="title">Название книги</string>
+    <string name="author">Автор книги</string>
+    <string name="add_book">Добавить книгу</string>
+    <string name="add_image">"Выберите изображение: "</string>
 </resources>

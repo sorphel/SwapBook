@@ -7,12 +7,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.smallgroup.swapbook.R;
 import com.smallgroup.swapbook.domain.Book;
 import com.smallgroup.swapbook.presentation.contracts.SearchContract;
 import com.smallgroup.swapbook.presentation.presenters.SearchPresenter;
-import com.smallgroup.swapbook.presentation.view.BaseView;
 import com.smallgroup.swapbook.presentation.view.MyCardBookAdapter;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
@@ -27,6 +27,7 @@ import java.util.List;
  */
 public class SearchFragment extends Fragment implements SearchContract.View, CardStackListener {
 
+    private ProgressBar progressBar;
     CardStackView cardStackView;
     MyCardBookAdapter cardAdapter;
     CardStackLayoutManager layoutManager;
@@ -48,6 +49,9 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
         mPresenter = new SearchPresenter(this);
 
+        progressBar = view.findViewById(R.id.progress_bar);
+        progressBar.setVisibility(View.VISIBLE);
+
         cardStackView = view.findViewById(R.id.card_stack_view);
 
         layoutManager = new CardStackLayoutManager(this.getContext(), this);
@@ -63,6 +67,7 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
     @Override
     public void updateView(List<Book> books) {
+        progressBar.setVisibility(View.INVISIBLE);
         cardAdapter = new MyCardBookAdapter(this.getActivity().getApplicationContext(), books, resource);
         cardStackView.setAdapter(cardAdapter);
     }

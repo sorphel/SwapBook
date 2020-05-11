@@ -3,6 +3,7 @@ package com.smallgroup.swapbook.presentation.view.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.smallgroup.swapbook.R;
 import com.smallgroup.swapbook.domain.Book;
 import com.smallgroup.swapbook.presentation.contracts.ShelveContract;
@@ -29,6 +31,7 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
 
     MyCardBookAdapter adapter;
     RecyclerView recyclerView;
+    FloatingActionButton addButton;
 
     final int resourceId = R.layout.item_book_shelve;
 
@@ -46,6 +49,13 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
 
         mPresenter = new ShelvePresenter(this);
         recyclerView = view.findViewById(R.id.book_list_view);
+        addButton = view.findViewById(R.id.add_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAddBook();
+            }
+        });
 
         mPresenter.onLoadUsersBook();
 
@@ -56,6 +66,14 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
     public void onStart() {
         super.onStart();
         mPresenter.onLoadUsersBook();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_REQUEST && resultCode == getActivity().RESULT_OK){
+            mPresenter.onLoadUsersBook();
+        }
     }
 
     @Override

@@ -6,4 +6,6 @@
     <color name="text">#0090FF</color>
     <color name="fon">#BAB1B1</color>
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#FF5252</color>
 </resources>
