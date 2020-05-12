@@ -66,7 +66,7 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
 
         return view;
     }
-    
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -79,7 +79,7 @@ public class ShelveFragment extends Fragment implements ShelveContract.View {
     @Override
     public void updateView(List<Book> books) {
         if (books != null) {
-            adapter = new MyCardBookAdapter(this.getActivity().getApplicationContext(), books, resourceId);
+            adapter = new MyCardBookAdapter(this.getContext(), books, resourceId);
             recyclerView.setAdapter(adapter);
             //Toast.makeText(getContext(), books.get(0).getUrl(), Toast.LENGTH_LONG).show();
         }

@@ -16,4 +16,5 @@
     <string name="author">Автор книги</string>
     <string name="add_book">Добавить книгу</string>
     <string name="add_image">"Выберите изображение: "</string>
+    <string name="sign_out">Выйти</string>
 </resources>
