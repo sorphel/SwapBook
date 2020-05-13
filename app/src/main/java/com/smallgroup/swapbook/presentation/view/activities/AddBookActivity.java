@@ -40,6 +40,7 @@ public class AddBookActivity extends AppCompatActivity implements AddContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
+        getSupportActionBar().hide();
 
         mPresenter = new AddPresenter(this);
 

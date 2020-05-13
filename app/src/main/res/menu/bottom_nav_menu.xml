@@ -4,7 +4,7 @@
     <item
         android:id="@+id/navigation_shelve"
         android:icon="@drawable/ic_shelve_black_24dp"
-        android:title="@string/shelve"/>
+        android:title="@string/shelve" />
 
     <item
         android:id="@+id/navigation_search"

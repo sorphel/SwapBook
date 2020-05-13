@@ -1,6 +1,8 @@
 package com.smallgroup.swapbook.data;
 
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -46,6 +48,8 @@ public class DataBaseManager {
 
     public void loadBooks(){
 
+        final List<Book> list = new ArrayList<>();
+
         db.collection(BOOKS)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -53,8 +57,10 @@ public class DataBaseManager {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots){
                                 Book book = new Book((HashMap<String, Object>) document.getData());
-                                bookList.add(book);
+                                list.add(book);
+
                             }
+                            Log.d("LIST1", list.toString());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -63,6 +69,7 @@ public class DataBaseManager {
 
                     }
                 });
+        Log.d("LIST2", list.toString());
 
     }
 

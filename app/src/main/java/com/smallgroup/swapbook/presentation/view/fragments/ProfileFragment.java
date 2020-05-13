@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.smallgroup.swapbook.R;
 import com.smallgroup.swapbook.presentation.contracts.ProfileContract;
 import com.smallgroup.swapbook.presentation.presenters.ProfilePresenter;
@@ -67,7 +68,7 @@ public class ProfileFragment extends Fragment implements ProfileContract.View {
     public void uploadImage(Uri uri) {
         Glide.with(getContext())
                 .load(uri)
-                .circleCrop()
+                .apply(RequestOptions.circleCropTransform())
                 .into(mImageView);
     }
 

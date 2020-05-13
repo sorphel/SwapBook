@@ -13,4 +13,25 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="MainMargin">
+        <item name="android:layout_margin">12dp</item>
+    </style>
+
+    <style name="ButtonStyle">
+        <item name="android:background">@color/colorAccent</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
+    <style name="TextSizeMiddle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextSizeSmall">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextSizeLarge">
+        <item name="android:textSize">25sp</item>
+    </style>
+
 </resources>

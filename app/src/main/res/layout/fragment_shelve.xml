@@ -17,12 +17,12 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/add_button"
+            style="@style/ButtonStyle"
+            android:layout_margin="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="20dp"
-            app:backgroundTint="@color/red"
             android:src="@drawable/ic_add_black_24dp" />
 
 
