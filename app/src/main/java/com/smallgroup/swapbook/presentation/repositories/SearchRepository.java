@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -23,7 +24,7 @@ public class SearchRepository implements SearchContract.Repository {
 
     private SearchContract.Presenter mPresenter;
     private List<Book> bookList = new ArrayList();
-
+    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
     public SearchRepository(SearchContract.Presenter mPresenter) {
         this.mPresenter = mPresenter;
@@ -38,7 +39,9 @@ public class SearchRepository implements SearchContract.Repository {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots){
                             Book book = new Book((HashMap<String, Object>) document.getData());
-                            bookList.add(book);
+                            if (!book.getIdUser().equals(currentUser)) {
+                                bookList.add(book);
+                            }
                         }
                         mPresenter.onUpdateView(bookList);
                     }
