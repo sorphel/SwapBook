@@ -4,10 +4,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.smallgroup.swapbook.R;
 import com.smallgroup.swapbook.domain.Book;
@@ -18,6 +23,8 @@ import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
 import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.Direction;
+import com.yuyakaido.android.cardstackview.Duration;
+import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +35,9 @@ import java.util.List;
 public class SearchFragment extends Fragment implements SearchContract.View, CardStackListener {
 
     private ProgressBar progressBar;
+    private Button mLike;
+    private Button mDislike;
+
     CardStackView cardStackView;
     MyCardBookAdapter cardAdapter;
     CardStackLayoutManager layoutManager;
@@ -48,6 +58,32 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         mPresenter = new SearchPresenter(this);
+
+        mLike = (Button) view.findViewById(R.id.like_button);
+        mLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwipeAnimationSetting swipeLike = new SwipeAnimationSetting.Builder().setDirection(Direction.Right)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+                layoutManager.setSwipeAnimationSetting(swipeLike);
+                cardStackView.swipe();
+            }
+        });
+
+        mDislike = (Button) view.findViewById(R.id.dislike_button);
+        mDislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwipeAnimationSetting swipeLike = new SwipeAnimationSetting.Builder().setDirection(Direction.Left)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+                layoutManager.setSwipeAnimationSetting(swipeLike);
+                cardStackView.swipe();
+            }
+        });
 
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
@@ -85,7 +121,12 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
     @Override
     public void onCardSwiped(Direction direction) {
-
+        if (direction == Direction.Right){
+            Toast.makeText(getContext(), "Liked", Toast.LENGTH_SHORT).show();
+        }
+        else if (direction == Direction.Left){
+            Toast.makeText(getContext(), "Disliked", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
