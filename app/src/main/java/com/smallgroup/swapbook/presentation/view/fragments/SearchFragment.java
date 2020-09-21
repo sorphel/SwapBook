@@ -4,11 +4,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.smallgroup.swapbook.R;
 import com.smallgroup.swapbook.domain.Book;
@@ -30,9 +34,10 @@ import java.util.List;
  */
 public class SearchFragment extends Fragment implements SearchContract.View, CardStackListener {
 
-    private Button mLikeButton, mDislikeButton;
-
     private ProgressBar progressBar;
+    private Button mLike;
+    private Button mDislike;
+
     CardStackView cardStackView;
     MyCardBookAdapter cardAdapter;
     CardStackLayoutManager layoutManager;
@@ -54,21 +59,36 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
         mPresenter = new SearchPresenter(this);
 
+        mLike = (Button) view.findViewById(R.id.like_button);
+        mLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwipeAnimationSetting swipeLike = new SwipeAnimationSetting.Builder().setDirection(Direction.Right)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+                layoutManager.setSwipeAnimationSetting(swipeLike);
+                cardStackView.swipe();
+            }
+        });
+
+        mDislike = (Button) view.findViewById(R.id.dislike_button);
+        mDislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SwipeAnimationSetting swipeLike = new SwipeAnimationSetting.Builder().setDirection(Direction.Left)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+                layoutManager.setSwipeAnimationSetting(swipeLike);
+                cardStackView.swipe();
+            }
+        });
+
         progressBar = view.findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
 
         cardStackView = view.findViewById(R.id.card_stack_view);
-        final SwipeAnimationSetting settingRight = new SwipeAnimationSetting.Builder()
-                .setDuration(Duration.Normal.duration)
-                .setDirection(Direction.Right)
-                .build();
-
-        final SwipeAnimationSetting settingLeft = new SwipeAnimationSetting.Builder()
-                .setDuration(Duration.Normal.duration)
-                .setDirection(Direction.Left)
-                .build();
-
-
 
         layoutManager = new CardStackLayoutManager(this.getContext(), this);
         layoutManager.setMaxDegree(0);
@@ -77,23 +97,6 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
         loadCard();
 
         cardStackView.setLayoutManager(layoutManager);
-
-        mLikeButton = view.findViewById(R.id.like_button);
-        mLikeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutManager.setSwipeAnimationSetting(settingRight);
-                cardStackView.swipe();
-            }
-        });
-        mDislikeButton = view.findViewById(R.id.dislike_button);
-        mDislikeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutManager.setSwipeAnimationSetting(settingLeft);
-                cardStackView.swipe();
-            }
-        });
 
         return view;
     }
@@ -118,7 +121,12 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
     @Override
     public void onCardSwiped(Direction direction) {
-
+        if (direction == Direction.Right){
+            Toast.makeText(getContext(), "Liked", Toast.LENGTH_SHORT).show();
+        }
+        else if (direction == Direction.Left){
+            Toast.makeText(getContext(), "Disliked", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
