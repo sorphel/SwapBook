@@ -36,5 +36,8 @@ public class SearchPresenter implements SearchContract.Presenter {
         mView.updateView(books);
     }
 
-
+    @Override
+    public void onLike(Book book) {
+        mRepository.addLiked(book);
+    }
 }

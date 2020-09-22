@@ -7,22 +7,19 @@ import com.smallgroup.swapbook.presentation.view.BaseView;
 
 import java.util.List;
 
-public interface SearchContract {
+public interface NotificationsContract {
 
     interface View extends BaseView {
-        void loadCard();
         void updateView(List<Book> books);
     }
 
     interface Presenter extends BasePresenter {
-        void onLoadBooks();
         void onUpdateView(List<Book> books);
-        void onLike(Book book);
+        void onLoadUsersBook();
     }
 
     interface Repository extends BaseRepository {
-        void loadBooks();
-        void addLiked(Book likedBook);
+        void loadUsersBooks();
     }
 
 }

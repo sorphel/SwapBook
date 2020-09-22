@@ -5,5 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".presentation.view.fragments.NotificationsFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/liked_book_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    </RelativeLayout>
 
 </FrameLayout>

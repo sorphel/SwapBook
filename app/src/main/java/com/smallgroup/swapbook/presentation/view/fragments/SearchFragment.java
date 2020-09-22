@@ -122,7 +122,17 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
     @Override
     public void onCardSwiped(Direction direction) {
         if (direction == Direction.Right){
-            Toast.makeText(getContext(), "Liked", Toast.LENGTH_SHORT).show();
+            try {
+                Book curBook = cardAdapter.getBooks().get(
+                        layoutManager.getTopPosition() - 1
+                );
+                mPresenter.onLike(curBook);
+                Toast.makeText(getContext(), curBook.getIdUser(), Toast.LENGTH_SHORT).show();
+            }
+            catch (Exception e){
+                Toast.makeText(getContext(), "Not found element", Toast.LENGTH_SHORT).show();
+            }
+            //Toast.makeText(getContext(), "Liked", Toast.LENGTH_SHORT).show();
         }
         else if (direction == Direction.Left){
             Toast.makeText(getContext(), "Disliked", Toast.LENGTH_SHORT).show();
@@ -146,7 +156,8 @@ public class SearchFragment extends Fragment implements SearchContract.View, Car
 
     @Override
     public void onCardDisappeared(View view, int position) {
-
+        //TODO
+        Book curBook = cardAdapter.getBooks().get(position);
     }
 
 }
